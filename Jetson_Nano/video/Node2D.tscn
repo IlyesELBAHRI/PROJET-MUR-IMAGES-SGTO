@@ -1,0 +1,451 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Node2D.gd" type="Script" id=2]
+[ext_resource path="res://src/meteo.png" type="Texture" id=3]
+[ext_resource path="res://src/Source_Sans_Pro/SourceSansPro-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://src/coolvetica/coolvetica rg.otf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 49
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 45
+outline_color = Color( 0.976471, 0.945098, 0.945098, 1 )
+font_data = ExtResource( 5 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VideoPlayer" type="VideoPlayer" parent="Control"]
+anchor_right = 25.65
+anchor_bottom = 15.3
+margin_right = -5.99982
+margin_bottom = -12.0
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Control"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 512.265, 300.263 )
+scale = Vector2( 1.63371, 1.19596 )
+texture = ExtResource( 3 )
+
+[node name="Tween" type="Tween" parent="Control/Sprite"]
+
+[node name="Label" type="Label" parent="Control"]
+margin_left = 24.1971
+margin_top = 18.9688
+margin_right = 910.197
+margin_bottom = 32.9688
+rect_clip_content = true
+custom_colors/font_color = Color( 0.8, 0.129412, 0.129412, 1 )
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Labels_Metro" type="Control" parent="Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Metro7_1" type="Label" parent="Control/Labels_Metro"]
+margin_left = 702.885
+margin_top = 167.199
+margin_right = 742.885
+margin_bottom = 239.199
+custom_fonts/font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Metro7_2" type="Label" parent="Control/Labels_Metro"]
+margin_left = 875.036
+margin_top = 167.778
+margin_right = 915.036
+margin_bottom = 239.778
+custom_fonts/font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Metro7_3" type="Label" parent="Control/Labels_Metro"]
+margin_left = 702.885
+margin_top = 225.605
+margin_right = 742.885
+margin_bottom = 297.605
+custom_fonts/font = SubResource( 1 )
+text = "0"
+
+[node name="Metro7_4" type="Label" parent="Control/Labels_Metro"]
+margin_left = 875.036
+margin_top = 226.184
+margin_right = 915.036
+margin_bottom = 298.184
+custom_fonts/font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Metro7_5" type="Label" parent="Control/Labels_Metro"]
+margin_left = 702.354
+margin_top = 281.137
+margin_right = 742.354
+margin_bottom = 353.137
+custom_fonts/font = SubResource( 1 )
+text = "0"
+
+[node name="Metro7_6" type="Label" parent="Control/Labels_Metro"]
+margin_left = 874.505
+margin_top = 281.715
+margin_right = 914.505
+margin_bottom = 353.715
+custom_fonts/font = SubResource( 1 )
+text = "0"
+
+[node name="Metro10_1" type="Label" parent="Control/Labels_Metro"]
+margin_left = 701.234
+margin_top = 357.669
+margin_right = 741.234
+margin_bottom = 429.669
+custom_fonts/font = SubResource( 1 )
+text = "0"
+
+[node name="Metro10_2" type="Label" parent="Control/Labels_Metro"]
+margin_left = 873.385
+margin_top = 358.248
+margin_right = 913.385
+margin_bottom = 430.248
+custom_fonts/font = SubResource( 1 )
+text = "0"
+
+[node name="Metro10_3" type="Label" parent="Control/Labels_Metro"]
+margin_left = 701.234
+margin_top = 425.325
+margin_right = 741.234
+margin_bottom = 497.325
+custom_fonts/font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Metro10_4" type="Label" parent="Control/Labels_Metro"]
+margin_left = 873.385
+margin_top = 425.904
+margin_right = 913.385
+margin_bottom = 497.904
+custom_fonts/font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Labels_Meteo" type="Control" parent="Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Auj" type="Label" parent="Control/Labels_Meteo"]
+modulate = Color( 0.317647, 0.223529, 0.941176, 1 )
+margin_left = 8.75903
+margin_top = 190.018
+margin_right = 327.759
+margin_bottom = 263.018
+custom_fonts/font = SubResource( 2 )
+text = "Aujourd'hui :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jour1_1" type="Label" parent="Control/Labels_Meteo"]
+modulate = Color( 0.317647, 0.223529, 0.941176, 1 )
+margin_left = 292.677
+margin_top = 190.018
+margin_right = 359.677
+margin_bottom = 263.018
+custom_fonts/font = SubResource( 2 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jour1_2" type="Label" parent="Control/Labels_Meteo"]
+modulate = Color( 0.317647, 0.223529, 0.941176, 1 )
+margin_left = 478.222
+margin_top = 190.018
+margin_right = 518.222
+margin_bottom = 263.018
+custom_fonts/font = SubResource( 2 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jour1_3" type="Label" parent="Control/Labels_Meteo"]
+modulate = Color( 0.317647, 0.223529, 0.941176, 1 )
+margin_left = 622.164
+margin_top = 190.018
+margin_right = 1034.16
+margin_bottom = 263.018
+custom_fonts/font = SubResource( 2 )
+text = "Description"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dem" type="Label" parent="Control/Labels_Meteo"]
+modulate = Color( 0.317647, 0.223529, 0.941176, 1 )
+margin_left = 7.81573
+margin_top = 270.018
+margin_right = 305.816
+margin_bottom = 343.018
+custom_fonts/font = SubResource( 2 )
+text = "Demain :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jour2_1" type="Label" parent="Control/Labels_Meteo"]
+modulate = Color( 0.317647, 0.223529, 0.941176, 1 )
+margin_left = 295.467
+margin_top = 270.018
+margin_right = 335.467
+margin_bottom = 343.018
+custom_fonts/font = SubResource( 2 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jour2_2" type="Label" parent="Control/Labels_Meteo"]
+modulate = Color( 0.317647, 0.223529, 0.941176, 1 )
+margin_left = 481.012
+margin_top = 270.018
+margin_right = 521.012
+margin_bottom = 343.018
+custom_fonts/font = SubResource( 2 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jour2_3" type="Label" parent="Control/Labels_Meteo"]
+modulate = Color( 0.317647, 0.223529, 0.941176, 1 )
+margin_left = 622.164
+margin_top = 270.018
+margin_right = 1034.16
+margin_bottom = 343.018
+custom_fonts/font = SubResource( 2 )
+text = "Description"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Apr_Dem" type="Label" parent="Control/Labels_Meteo"]
+modulate = Color( 0.317647, 0.223529, 0.941176, 1 )
+margin_left = 4.04242
+margin_top = 355.018
+margin_right = 366.042
+margin_bottom = 428.018
+custom_fonts/font = SubResource( 2 )
+text = "Après demain :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jour3_1" type="Label" parent="Control/Labels_Meteo"]
+modulate = Color( 0.317647, 0.223529, 0.941176, 1 )
+margin_left = 296.443
+margin_top = 355.018
+margin_right = 336.443
+margin_bottom = 428.018
+custom_fonts/font = SubResource( 2 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jour3_2" type="Label" parent="Control/Labels_Meteo"]
+modulate = Color( 0.317647, 0.223529, 0.941176, 1 )
+margin_left = 481.989
+margin_top = 355.018
+margin_right = 521.989
+margin_bottom = 428.018
+custom_fonts/font = SubResource( 2 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jour3_3" type="Label" parent="Control/Labels_Meteo"]
+modulate = Color( 0.317647, 0.223529, 0.941176, 1 )
+margin_left = 622.164
+margin_top = 355.018
+margin_right = 1034.16
+margin_bottom = 428.018
+custom_fonts/font = SubResource( 2 )
+text = "Description"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Temp" type="Label" parent="Control/Labels_Meteo"]
+modulate = Color( 0.317647, 0.223529, 0.941176, 1 )
+margin_left = 247.417
+margin_top = 53.6282
+margin_right = 578.417
+margin_bottom = 166.628
+custom_fonts/font = SubResource( 2 )
+text = "Température (°C)
+    MIN      MAX"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Labels_Bus" type="Control" parent="Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bus89_1" type="Label" parent="Control/Labels_Bus"]
+margin_left = 728.0
+margin_top = 174.878
+margin_right = 768.0
+margin_bottom = 246.878
+custom_fonts/font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bus89_2" type="Label" parent="Control/Labels_Bus"]
+margin_left = 888.271
+margin_top = 174.878
+margin_right = 928.271
+margin_bottom = 246.878
+custom_fonts/font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bus89_3" type="Label" parent="Control/Labels_Bus"]
+margin_left = 728.0
+margin_top = 242.003
+margin_right = 768.0
+margin_bottom = 314.003
+custom_fonts/font = SubResource( 1 )
+text = "0"
+
+[node name="Bus89_4" type="Label" parent="Control/Labels_Bus"]
+margin_left = 888.271
+margin_top = 242.003
+margin_right = 928.271
+margin_bottom = 314.003
+custom_fonts/font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bus67_1" type="Label" parent="Control/Labels_Bus"]
+margin_left = 728.0
+margin_top = 326.928
+margin_right = 768.0
+margin_bottom = 398.928
+custom_fonts/font = SubResource( 1 )
+text = "0"
+
+[node name="Bus67_2" type="Label" parent="Control/Labels_Bus"]
+margin_left = 888.271
+margin_top = 326.928
+margin_right = 928.271
+margin_bottom = 398.928
+custom_fonts/font = SubResource( 1 )
+text = "0"
+
+[node name="Bus67_3" type="Label" parent="Control/Labels_Bus"]
+margin_left = 728.0
+margin_top = 382.69
+margin_right = 768.0
+margin_bottom = 454.69
+custom_fonts/font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bus67_4" type="Label" parent="Control/Labels_Bus"]
+margin_left = 888.271
+margin_top = 382.69
+margin_right = 928.271
+margin_bottom = 454.69
+custom_fonts/font = SubResource( 1 )
+text = "0"
+
+[node name="Bus63_1" type="Label" parent="Control/Labels_Bus"]
+margin_left = 728.0
+margin_top = 464.078
+margin_right = 768.0
+margin_bottom = 536.078
+custom_fonts/font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bus63_2" type="Label" parent="Control/Labels_Bus"]
+margin_left = 888.271
+margin_top = 464.078
+margin_right = 928.271
+margin_bottom = 536.078
+custom_fonts/font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bus63_3" type="Label" parent="Control/Labels_Bus"]
+margin_left = 728.0
+margin_top = 519.778
+margin_right = 768.0
+margin_bottom = 591.778
+custom_fonts/font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bus63_4" type="Label" parent="Control/Labels_Bus"]
+margin_left = 888.271
+margin_top = 519.778
+margin_right = 928.271
+margin_bottom = 591.778
+custom_fonts/font = SubResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}

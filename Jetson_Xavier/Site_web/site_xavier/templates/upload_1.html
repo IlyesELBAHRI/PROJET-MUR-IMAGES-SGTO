@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+    <body onload="delete_existing_file()">
+        <img class="top-left" src="../static/css/img/Polytech.png">
+        <img class="top-right" src="../static/css/img/Sorbonne.png">
+        <center>
+            <h1 class="titre">Télécharger une image ou une vidéo - Écran 1</h1>
+        </center>
+        <form method="post" enctype="multipart/form-data" action="/upload_1/" onsubmit="return validateForm()">
+            <div class="file-input-div">
+                <input type="file" id="fileInput" name="file" multiple>
+                <span class="types-message">Formats de fichier autorisés : .ogg, .ogv, .webm, .jpg, .png</span>
+            </div>
+            <input type="submit" name="submit" value="Télécharger">
+        </form>
+        
+        <div class="fichiers">
+            <select id="file-select" multiple onchange="onFileSelect()">
+            {% for file in files %}
+                {% if not file.endswith(".txt") %}
+                    <option>{{ file }}</option>
+                {% endif %}
+            {% endfor %}
+            </select>
+        </div>
+
+        <p>
+            <button type="button" onclick="onTeleverserClick()">Téléverser</button>
+        </p>
+
+    <div class="fichiers">
+        <h2>Fichiers sélectionnés :</h2>
+        <ul id="selected-files"></ul>
+    </div>
+
+    <div class="existing_files">
+        <h2>Fichiers déjà présents :</h2>
+        <ul>
+            {% if existing_files %}
+            {% for file in existing_files %}
+                {% if file not in files_to_delete %}  <!-- Vérifier si le fichier ne doit pas être supprimé -->
+                    <li>{{ file }} <button type="button" id="deleteBtn{{ loop.index }}">Supprimer</button></li>  
+                {% endif %}
+            {% endfor %}
+            {% else %}
+                <li>Aucun fichier sélectionné pour le moment.</li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <p>
+        <button type="button" onClick="generateConfig()">Générer le fichier de configuration</button>
+    </p>
+
+    <p>
+        <button type="button" onClick="clearCache()">Vider les fichers à supprimer</button>
+    </p>
+
+    <p>
+        <a href="/" class="home-link">Retour à l'accueil</a>
+        <button type="button" class="refresh-button" onclick="location.reload()">Actualiser</button>
+    </p>
+    
+    <script>
+        function delete_existing_file() {
+        
+        var deleteButtons = document.querySelectorAll(".existing_files button");
+        for (var i = 0; i < deleteButtons.length; i++) {
+            deleteButtons[i].addEventListener("click", function() {
+            var li = this.parentNode;
+            var ul = li.parentNode;
+            ul.removeChild(li);
+
+            var filename = li.firstChild.textContent;
+
+            // Envoyer une requête Ajax pour supprimer le fichier du serveur Flask
+            $.ajax({
+                url: '/delete_existing_file_1/',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ filename: filename }),
+                success: function(response) {
+                    console.log(response);
+                }
+            });
+            });
+        }
+        }
+
+        function validateForm() {
+            var fileInput = document.getElementById("fileInput");
+            var files = fileInput.files;
+            var allowedExtensions = ["png", "jpg", "ogv", "ogg", "webm"];
+            
+            for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var extension = file.name.split(".").pop().toLowerCase();
+            
+            if (!allowedExtensions.includes(extension)) {
+                alert("Le fichier '" + file.name + "' n'est pas autorisé.");
+                return false; // Annule la soumission du formulaire si un fichier non autorisé est détecté
+            }
+            }
+        
+            return true; // Soumet le formulaire si tous les fichiers sont autorisés
+        }
+
+        function onFileSelect() {
+            // Récupérer le select, l'élément contenant la liste de fichiers sélectionnés et les fichiers déjà présents dans le fichier texte
+            var fileSelect = document.getElementById("file-select"); 
+            var selectedFiles = document.getElementById("selected-files");
+
+            // Récupérer le nom du fichier sélectionné
+            var selectedFile = fileSelect.options[fileSelect.selectedIndex].text;
+
+            // Ajouter le nom du fichier à la liste des fichiers sélectionnés
+            var li = document.createElement("li");
+            li.textContent = selectedFile;
+
+            // Ajouter un bouton de suppression
+            var button = document.createElement("button");
+            button.textContent = "Supprimer";
+            button.addEventListener("click", function() {
+              selectedFiles.removeChild(li);
+            });
+            li.appendChild(button);
+        
+            selectedFiles.appendChild(li);
+        }
+
+        function onTeleverserClick() {
+            // Récupérer la liste de fichiers sélectionnés
+            var selectedFiles = document.getElementById("selected-files");
+                    
+            // Boucler sur les éléments li de la liste et ajouter le nom du fichier à une liste
+            var filenames = [];
+            for (var i = 0; i < selectedFiles.children.length; i++) {
+              filenames.push(selectedFiles.children[i].textContent.replace("Supprimer", ""));
+            }
+
+            
+
+            // Récupérer la liste de fichiers déjà présents
+            var existingFiles = document.querySelectorAll(".existing_files li");
+
+            // Supprimer uniquement les fichiers sélectionnés des fichiers déjà présents
+            var existingFilesData = [];
+            for (var j = 0; j < existingFiles.length; j++) {
+                var fileText = existingFiles[j].textContent;
+                var fileName = fileText.substring(0, fileText.indexOf(" "));
+                if (!filenames.includes(fileName)) {
+                    existingFilesData.push(fileName);
+                }
+            }
+
+            // Récupérer la liste de fichiers déjà présents
+            var filesToDelete = JSON.parse(localStorage.getItem("filesToDelete")) || [];
+
+            // Envoyer la liste de noms de fichiers à Flask (par exemple en utilisant une requête Ajax)
+            $.ajax({
+                url: '/televerser_1/',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ filenames: filenames , existing_files: existingFilesData , filesToDelete: filesToDelete}),
+                success: function(response) {
+                    console.log(response);
+                    // Effacer la liste des fichiers à supprimer de la mémoire locale
+                    localStorage.removeItem("filesToDelete");
+                    location.reload();
+                }
+            }); 
+        }
+    
+        function generateConfig() {
+            $.ajax({
+                url: '/generate_config_1/',
+                type: 'POST',
+                contentType: 'application/json',
+                success: function(response) {
+                    console.log(response);
+                    window.location.href = "/message.html";
+                }
+            });
+        }
+
+        function clearCache() {
+            $.ajax({
+                url: '/clear_cache_1/',
+                type: 'POST',
+                contentType: 'application/json',
+                success: function(response) {
+                    console.log(response);
+                }
+            });
+        }
+
+    </script>
+    </body>
+</html>
